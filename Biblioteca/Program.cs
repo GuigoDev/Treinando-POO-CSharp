@@ -16,19 +16,33 @@ class Program
 {
     static void Main(string[] args)
     {
-        Livro livro1 = new Livro(   
-                                    "1984",
-                                    "George Orwell",
-                                    328
-                                );
+        Console.WriteLine("=== Sistema de Biblioteca ===\n");
 
-        Console.WriteLine($"Título: {livro1.Titulo}");
-        Console.WriteLine($"Autor: {livro1.Autor}");
-        Console.WriteLine($"Páginas: {livro1.Paginas}");
+        Livro livro1 = new Livro("1984","George Orwell", "978-0132350884", 328, 2008);
+
+        livro1.ExibirInformacoes();
+
+        Console.WriteLine("\n--- Emprestando livro ---");
         livro1.Emprestar();
-        livro1.Emprestar(); // Tentativa de emprestar novamente
-        livro1.Devolver();
+        livro1.Emprestar(); 
+
+        Console.WriteLine("\n--- Devolvendo livro ---");
         livro1.Devolver();
 
+        Console.WriteLine("\n--- Teste de validação ---");
+        try 
+            {
+                Livro livroInvalido = new Livro(
+                    "Teste", 
+                    "Autor", 
+                    "123",
+                    -100, // Inválido!
+                    2020
+                );
+            }
+            catch (ArgumentException e) 
+            {
+                Console.WriteLine($"Erro capturado: {e.Message}");
+            }
     }
 }
